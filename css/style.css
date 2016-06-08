@@ -1,0 +1,143 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+path {
+  fill: white;
+  stroke-dasharray: none;
+  transition: fill, 1s;
+}
+
+/*
+.metropolitana { fill: #b6defc; transition: fill, 1s;}
+.metropolitana:hover {fill:gray; transition: fill, 1s;}
+.noroestefluminense { fill: #fcbbd6; transition: fill, 1s;}
+.noroestefluminense:hover {fill:gray; transition: fill, 1s;}
+.nortefluminense { fill: #bdfcf9; transition: fill, 1s;}
+.nortefluminense:hover {fill:gray; transition: fill, 1s;}
+.serrana { fill: #fce5b6; transition: fill, 1s;}
+.serrana:hover {fill:gray; transition: fill, 1s;}
+.baixadaslitoraneas { fill: #f2d4fc; transition: fill, 1s;}
+.baixadaslitoraneas:hover {fill:gray; transition: fill, 1s;}
+.medioparaiba { fill: #b9b8fc; transition: fill, 1s;}
+.medioparaiba:hover {fill:gray; transition: fill, 1s;}
+.centro-sul { fill: #f2d4fc; transition: fill, 1s;}
+.centro-sul:hover {fill:gray; transition: fill, 1s;}
+.costaverde { fill: #b6fcb9; transition: fill, 1s;}
+.costaverde:hover {fill:gray; transition: fill, 1s;}
+*/
+.titulo {
+  font-size: 20px;
+  font-family: Helvetica, sans-serif;
+  fill: black;
+  stroke: none;
+  font-weight: bold;
+}
+.titulo1 {
+  font-size: 20px;
+  font-family: Tahoma, sans-serif;
+  fill: black;
+  stroke: none;
+  /*  font-weight: bold; */
+}
+.tituloISP {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  fill: black;
+  stroke: none;
+  /*  font-weight: bold; */
+}
+.myTip {
+  display: table-cell;
+  vertical-align: middle;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  color: white;
+  background-color: black;
+  padding: .5em;
+  /*text-shadow: #f5f5f5 0 1px 0; */
+  opacity: 0.8;
+  border-radius: 10px;
+}
+.cisp {
+  /*fill: none; */
+  stroke: #666666;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+circle {
+  fill: black;
+  opacity: 1.0;
+  stroke: none;
+}
+.spRect1 {
+  fill:#8dd3c7;
+  stroke:white;
+  stroke-width:1;
+  stroke-dasharray: none;
+  opacity:0.7;
+  stroke-opacity:0.8;
+  transition: fill, 0.5s;
+}
+.spRect2 {
+  fill:steelblue;
+  stroke:white;
+  stroke-width:1;
+  stroke-dasharray: none;
+  opacity:0.7;
+  stroke-opacity:0.8;
+  transition: fill, 0.5s;
+}
+.spRect3 {
+  fill:#bebada;
+  stroke:white;
+  stroke-width:1;
+  stroke-dasharray: none;
+  opacity:0.7;
+  stroke-opacity:0.8;
+  transition: fill, 0.5s;
+}
+.spRect4 {
+  fill:blue;
+  stroke:white;
+  stroke-width:1;
+  stroke-dasharray: none;
+  opacity:0.7;
+  stroke-opacity:0.8;
+  transition: fill, 0.5s;  
+}
+.isp {
+  font-family: Helvetica;
+  fill: white;
+}
+.invisivel {
+  /*fill:#bebada;*/
+  fill:steeblue;
+  stroke:black;
+  stroke-width:1;
+  stroke-dasharray: none;
+  opacity:0;
+}
+.legenda {
+  font-size: 11px;
+  fill: black;
+  stroke: none;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+.tick {
+  font-size: 1em;
+}
+.retMapa {
+  stroke: white;
+  stroke-width:1;
+}
+.gLabel {
+  font-size: .80em;
+}
+.update {
+  fill: steeblue;
+}
