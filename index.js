@@ -177,7 +177,7 @@ function preencheIndicador(listaIndicadores) {
       //cl.pintaMapa(vetDados[selInd].dados, vetDados[selInd].distribuicao, vetDados[selInd].tipo, vetDados[selInd].range, vetDados[selInd].legenda2, initClasse(vetDados[selInd].classes));
       //cl.pintaMapa(vetDados[selInd].dados, vetDados[selInd].distribuicao, vetDados[selInd].tipo, vetDados[selInd].range, vetDados[selInd].legenda2, +d3.select("#valor-classes").text());
       rio.dados(vetDados[selInd].dados).distribuicao(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).rangeData(vetDados[selInd].range).tit(vetDados[selInd].legenda2).faixas(+d3.select("#valor-classes").text()).ano(vetDados[selInd].ano).call();
-      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).call();
+      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).rangeHist(vetDados[selInd].range).call();
     }
     document.getElementById("selecIndicador").options[0].selected = true;
   }
@@ -218,7 +218,7 @@ function preencheIndicador(listaIndicadores) {
       selInd=0;
       //cl.pintaMapa(vetDados[selInd].dados, vetDados[selInd].distribuicao, vetDados[selInd].tipo, vetDados[selInd].range, vetDados[selInd].legenda2, initClasse(vetDados[selInd].classes));
       rio.dados(vetDados[selInd].dados).distribuicao(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).rangeData(vetDados[selInd].range).tit(vetDados[selInd].legenda2).faixas(initClasse(vetDados[selInd].classes)).ano(vetDados[selInd].ano).call();
-      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).call();
+      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).rangeHist(vetDados[selInd].range).call();
       rangeUpdate();
     }
   }

@@ -744,6 +744,7 @@
 	  	  var domEixo = [], rangEixo = [];
 
 	  	  d3.select("g.legenda").remove();
+	  	  
 	      cl.status = tipo;
 
 		  for (j in dados) {

@@ -23,6 +23,7 @@
     var legenda = "Histograma";
     var escalaY = "linear";
     var tipo = "";
+    var rangeHist = [];
     var mensagemxAxis = "Eixo X";
     var margin = {top: 20, right: 10, bottom: 160, left: 70},
       width = 950 - margin.left - margin.right,
@@ -219,7 +220,8 @@
         else
           dataMin = dataMin * 1.3;
 
-      y.domain([dataMin, d3.max(dados[ano], function(d, i) { return d[1]; })]);
+      //y.domain([dataMin, d3.max(dados[ano], function(d, i) { return d[1]; })]);
+      y.domain(rangeHist);
       hstext.remove();
       if (!hs_temHistograma) {
         svgH.append("g")
@@ -410,6 +412,12 @@
     histograma.ano = function(valor) {
       if(!arguments.length) return ano;
       ano = valor;
+      return histograma;
+    }
+
+    histograma.rangeHist = function(valor) {
+      if(!arguments.length) return rangeHist;
+      rangeHist = valor;
       return histograma;
     }
 
