@@ -59,7 +59,7 @@
       var svg =  d3.select(".y.axis");
       svg.on("mouseover", function() {
         var tip = d3.select("div.myTip");
-        tip.html(hs.legenda);
+        tip.html(hs.legenda + " - " + ano);
         return cl.tooltip.style("visibility", "visible");})
       .on("mousemove", function() {
         return cl.tooltip.style("top", (d3.event.pageY-10)+"px")
@@ -245,10 +245,10 @@
           .attr("y", 2)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
-          .text(legenda);
+          .text(legenda + " - " + ano);
       } else {
         d3.select(".y.axis").transition().duration(1000).call(yAxis);
-        d3.select(".y.axis").select("text.gLabel").text(hs.legenda=legenda);
+        d3.select(".y.axis").select("text.gLabel").text(hs.legenda=legenda + " - " + ano);
 
         hsx.domain(dados[ano].map(function(d, i) {
           return hs.nomeAISPouDP[tipo](d[0]);

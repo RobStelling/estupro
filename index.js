@@ -109,8 +109,9 @@ q()
       }
     }
 
-    vetDados.push({selecionado: true, dados:est, distribuicao: "linear", tipo:"aisp", range: [0, max], legenda1: "Estupros por AISP", legenda2: "Estupros p/AISP", classes: 7, ano: 2015});
-    vetDados.push({selecionado: true, dados:estC, distribuicao: "linear", tipo:"cisp", range: [0, maxC], legenda1: "Estupros por CISP", legenda2: "Estupros p/CISP", classes: 7, ano: 2015});
+    vetDados.push({selecionado: true, dados:est, distribuicao: "linear", tipo:"aisp", range: [0, max], legenda1: "Estupros por AISP", legenda2: "Estupros p/AISP", classes: 7, ano: 2013});
+    vetDados.push({selecionado: true, dados:estC, distribuicao: "linear", tipo:"cisp", range: [0, maxC], legenda1: "Estupros por CISP", legenda2: "Estupros p/CISP", classes: 7, ano: 2013});
+    vetDados.push({selecionado: false, legenda1: "──────────────────────────────" });
 
     var ro = {}, roC = {};
     totais = [];
@@ -143,8 +144,8 @@ q()
       }
     }
 
-    vetDados.push({selecionado: true, dados:ro, distribuicao: "linear", tipo:"aisp", range: [0, max], legenda1: "Registro de Ocorrências por AISP", legenda2: "Registro de Ocorrências p/AISP", classes: 7, ano: 2015});
-    vetDados.push({selecionado: true, dados:roC, distribuicao: "linear", tipo:"cisp", range: [0, maxC], legenda1: "Registro de Ocorrências por CISP", legenda2: "Registro de Ocorrências p/CISP", classes: 7, ano:2015});
+    vetDados.push({selecionado: true, dados:ro, distribuicao: "linear", tipo:"aisp", range: [0, max], legenda1: "Registro de Ocorrências por AISP", legenda2: "Registro de Ocorrências p/AISP", classes: 7, ano: 2013});
+    vetDados.push({selecionado: true, dados:roC, distribuicao: "linear", tipo:"cisp", range: [0, maxC], legenda1: "Registro de Ocorrências por CISP", legenda2: "Registro de Ocorrências p/CISP", classes: 7, ano:2013});
     preencheIndicador(vetDados);
   });
 
@@ -176,8 +177,8 @@ function preencheIndicador(listaIndicadores) {
     if ((selInd=s.selectedIndex-1) >= 0) {
       //cl.pintaMapa(vetDados[selInd].dados, vetDados[selInd].distribuicao, vetDados[selInd].tipo, vetDados[selInd].range, vetDados[selInd].legenda2, initClasse(vetDados[selInd].classes));
       //cl.pintaMapa(vetDados[selInd].dados, vetDados[selInd].distribuicao, vetDados[selInd].tipo, vetDados[selInd].range, vetDados[selInd].legenda2, +d3.select("#valor-classes").text());
-      rio.dados(vetDados[selInd].dados).distribuicao(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).rangeData(vetDados[selInd].range).tit(vetDados[selInd].legenda2).faixas(+d3.select("#valor-classes").text()).ano(vetDados[selInd].ano).call();
-      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).rangeHist(vetDados[selInd].range).call();
+      rio.dados(vetDados[selInd].dados).distribuicao(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).rangeData(vetDados[selInd].range).tit(vetDados[selInd].legenda2).faixas(+d3.select("#valor-classes").text()).call();
+      hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda2).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).rangeHist(vetDados[selInd].range).call();
     }
     document.getElementById("selecIndicador").options[0].selected = true;
   }

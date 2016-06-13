@@ -125,6 +125,16 @@ circle {
   stroke: none;
   shape-rendering: crispEdges;
 }
+
+.ano {
+  font-family: Helvetica;
+  font-weight: 900;
+  font-size: 3em;
+  fill: gray;
+  stroke: none;
+  shape-rendering: : crispEdges;
+}
+
 .x.axis path {
   display: none;
 }

@@ -734,7 +734,8 @@
 	  	  rangeData = [],
 	  	  tit = "",
 	  	  faixas = 0,
-	  	  ano;
+	  	  ano,
+	  	  totais = {};
 
 	  var i;
 	  var min, max;
@@ -744,24 +745,63 @@
 	  	  var domEixo = [], rangEixo = [];
 
 	  	  d3.select("g.legenda").remove();
-	  	  
-	      cl.status = tipo;
 
+	  	  d3.selectAll(".ano").remove();
+	  	  i = 0;
+	  	  for(j in dados) {
+	  	  	d3.select("svg")
+	  	  		.append("text")
+	  	  		.attr("class", "ano c"+j)
+	  	  		.attr({"x":20+i*140, "y":100})
+	  	  		.text(j)
+	  	  		.datum(j);
+	  	  	d3.select(".c"+j)
+	  	  		.on("click", function(d){
+	  	  			if (d != ano) {
+		  	  			rio.ano(d).call();
+		  	  			hist.ano(d).call();
+		  	  			d3.selectAll(".ano").style("fill", "gray");
+		  	  			d3.select(".c"+d).style("fill", "steelblue");
+		  	  			return cl.tooltip.style("visibility", "hidden");
+	  	  			}
+	  	  			return;
+	  	  		})
+    			.on("mouseover", function(d) {
+    				if (d != ano) {
+				        cl.tooltip.html("Clique para ver os dados de "+d);
+				        return cl.tooltip.style("visibility", "visible");
+			    	}
+			    	return;
+			      })
+			    .on("mousemove", function(d){
+			      if (d != ano)
+			      	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
+			        	.style("left",(d3.event.pageX+25)+"px");
+			        return;
+			    })
+			    .on("mouseout", function(d){
+			    	if (d != ano)
+			        	return cl.tooltip.style("visibility", "hidden");
+			        return;
+			      });
+	  	  	i++;
+	  	  }
+
+	      cl.status = tipo;
+	      totais = {};
 		  for (j in dados) {
 		  	cl.hashDados[j] = {};
-		  	for (i = 0; i < dados[ano].length; i++) {
-		    	cl.hashDados[j][dados[ano][i][0]] = dados[ano][i][1];
+		  	totais[j] = 0;
+		  	for (i = 0; i < dados[j].length; i++) {
+		    	cl.hashDados[j][dados[j][i][0]] = dados[j][i][1];
+		    	totais[j] += dados[j][i][1];
+			  }
 		  }
-	/*	    if (min > dados[i][1])
-		      min = dados[i][1];
-		    else if (max < dados[i][1])
-		      max = dados[i][1];
-	 */
-		  }
-		  cl.atual = +j;
+
+		  d3.select(".c"+ano).style("fill", "steelblue");
 		  min = rangeData[0];
 		  max = rangeData[1];
-		  cl.titulo(tit);
+		  cl.titulo(tit + " (" + totais[ano].toLocaleString() + ")" );
 		  var domainMap = [min, max];
 		  switch(distribuicao) {
 		    case 'sqrt':
@@ -830,14 +870,14 @@
 	     */
 		    .style("fill", function(d) {
 		      if (tipo == "cisp")
-		        return cl.cor(cl.hashDados[cl.atual][d.properties.DP]);
-		      return cl.cor(cl.hashDados[cl.atual][d.properties.AISP]);})
+		        return cl.cor(cl.hashDados[ano][d.properties.DP]);
+		      return cl.cor(cl.hashDados[ano][d.properties.AISP]);})
 		    .text(function(d) {
-		    if (typeof (cl.hashDados[cl.atual][d.properties.AISP]) === 'undefined')
+		    if (typeof (cl.hashDados[ano][d.properties.AISP]) === 'undefined')
 		      return(cl.aisp("nome", d.properties.AISP));
 		    else 
 		      return(cl.aisp("nome", d.properties.AISP)
-		           + ": " + cl.hashDados[cl.atual][d.properties.AISP].toLocaleString())});
+		           + ": " + cl.hashDados[ano][d.properties.AISP].toLocaleString())});
 		
 		
 		  //  cl.hashDados = {};
@@ -845,43 +885,44 @@
 // 	cl.pintaMapa = function(dados, distribuicao, tipo, rangeData, tit, faixas)
 		pintaMapa.dados = function(valor) {
       		if(!arguments.length) return dados;
-      			dados = valor;
+      		dados = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.distribuicao = function(valor) {
       		if(!arguments.length) return distribuicao;
-      			distribuicao = valor;
+      		distribuicao = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.tipo = function(valor) {
       		if(!arguments.length) return tipo;
-      			tipo = valor;
+      		tipo = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.rangeData = function(valor) {
       		if(!arguments.length) return rangeData;
-      			rangeData = valor;
+      		rangeData = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.tit = function(valor) {
       		if(!arguments.length) return tit;
-      			tit = valor;
+      		tit = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.faixas = function(valor) {
       		if(!arguments.length) return faixas;
-      			faixas = valor;
+      		faixas = valor;
       		return pintaMapa;
     	};
 
     	pintaMapa.ano = function(valor) {
       		if(!arguments.length) return ano;
-      			ano = valor;
+      		ano = valor;
+      		cl.atual = ano;
       		return pintaMapa;
     	};
 
