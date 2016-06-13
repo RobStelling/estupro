@@ -72,7 +72,8 @@ circle {
   stroke: none;
 }
 .spRect1 {
-  fill:#8dd3c7;
+/*  fill:#8dd3c7; */
+  fill:none;
   stroke:white;
   stroke-width:1;
   stroke-dasharray: none;
@@ -81,7 +82,8 @@ circle {
   transition: fill, 0.5s;
 }
 .spRect2 {
-  fill:steelblue;
+/*  fill:steelblue; */
+  fill:none;
   stroke:white;
   stroke-width:1;
   stroke-dasharray: none;
@@ -90,7 +92,8 @@ circle {
   transition: fill, 0.5s;
 }
 .spRect3 {
-  fill:#bebada;
+/*  fill:#bebada; */
+  fill: none;
   stroke:white;
   stroke-width:1;
   stroke-dasharray: none;
@@ -109,7 +112,8 @@ circle {
 }
 .isp {
   font-family: Helvetica;
-  fill: white;
+  font-weight: bold;
+  fill: gray;
 }
 .invisivel {
   /*fill:#bebada;*/
@@ -128,13 +132,18 @@ circle {
 
 .ano {
   font-family: Helvetica;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 3em;
   fill: gray;
   stroke: none;
   shape-rendering: : crispEdges;
 }
-
+.linha {
+  /*fill: none; */
+  stroke: #666666;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
 .x.axis path {
   display: none;
 }

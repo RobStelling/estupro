@@ -1,6 +1,7 @@
-function botaoISP(svg, x, y, textoButao, textoTip, titulo, classe, onClick ) {
+function botaoISP(svg, x, y, textoBotao, textoTip, titulo, classe, onClick ) {
   var corFill = "";
-  
+  var selecionado = "black";
+
   svg.append("rect")
     .attr("rx", 10)
     .attr("ry", 10)
@@ -11,7 +12,7 @@ function botaoISP(svg, x, y, textoButao, textoTip, titulo, classe, onClick ) {
     .attr("class", "tituloISP")
     .attr("transform", "translate("+(x+11)+","+(y+22)+")")
     .append("text")
-    .attr("class", "isp").text(textoButao);
+    .attr("class", "isp").text(textoBotao);
   svg.append("rect")
     .attr("rx", 10)
     .attr("ry", 10)
@@ -22,7 +23,7 @@ function botaoISP(svg, x, y, textoButao, textoTip, titulo, classe, onClick ) {
       var rect = d3.select("."+classe);
       var tip = d3.select("div.myTip");
       corFill = rect.style("fill");
-      rect.style({fill: cl.SELECIONADO});
+      rect.style({fill: selecionado});
       tip.html(textoTip);
       return cl.tooltip.style("visibility", "visible");
     })
@@ -44,9 +45,14 @@ function botaoISP(svg, x, y, textoButao, textoTip, titulo, classe, onClick ) {
 function lupa(svg, x, y) {
 
   var eixoX = d3.select(".x.axis");
-  var mensagemSemSelecao = "Clique para ampliar texto do eixo X",
-      mensagemSelecionado = "Clique para cancelar ampliação";
+  var mensagemSemSelecao,
+      mensagemSelecionado;
   var mensagem;
+
+  mensagemSemSelecao = ["Clique para ampliar texto do eixo X", "Click to activate X axis tooltip"][lang];
+  mensagemSelecionado = ["Clique para cancelar ampliação","Click to cancel tooltip"][lang];
+
+
   mensagem = mensagemSemSelecao;
   svg.append("circle")
       .attr({cx: String(x), cy: String(y), r: "10", class: "lupa"})

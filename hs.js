@@ -178,7 +178,6 @@
           return cl.aisp("nome", aisp);
         },
       "cisp":function(dp) {
-          //console.log(dp);
           if (cl.nomeDP[dp] != undefined)
             return cl.nomeDP[dp].up;
           return "undefined";

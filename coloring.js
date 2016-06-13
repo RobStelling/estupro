@@ -61,115 +61,6 @@
   var cl_textoAISP = "AISP";
   var cl_textoCISP = "CISP";
 	
-	cl.nid = function (attr, code) {
-	  var cdmun2id = {330010:function(attr){return attr=="aisp"?"AISP 33":attr=="nome"? "Angra dos Reis":attr=="regiao"?7:"AngradosReis";},
-	                  330015:function(attr){return attr=="aisp"?"AISP 36":attr=="regiao"?1:"Aperibé";},
-	                  330020:function(attr){return attr=="aisp"?"AISP 25":attr=="regiao"?4:"Araruama";},
-	                  330022:function(attr){return attr=="aisp"?"AISP 38":attr=="regiao"?6:"Areal";},
-	                  330023:function(attr){return attr=="aisp"?"AISP 25":attr=="nome"? "Armação dos Búzios":attr=="regiao"?4:"ArmaçãodosBúzios";},
-	                  330025:function(attr){return attr=="aisp"?"AISP 25":attr=="nome"? "Arraial do Cabo":attr=="regiao"?4:"ArraialdoCabo";},
-	                  330030:function(attr){return attr=="aisp"?"AISP 10":attr=="nome"? "Barra do Piraí":attr=="regiao"?5:"BarradoPiraí";},
-	                  330040:function(attr){return attr=="aisp"?"AISP 28":attr=="nome"? "Barra Mansa":attr=="regiao"?5:"BarraMansa";},
-	                  330045:function(attr){return attr=="aisp"?"AISP 40":attr=="nome"? "Belford Roxo":attr=="regiao"?0:"BelfordRoxo";},
-	                  330050:function(attr){return attr=="aisp"?"AISP 11":attr=="nome"? "Bom Jardim":attr=="regiao"?3:"BomJardim";},
-	                  330060:function(attr){return attr=="aisp"?"AISP 29":attr=="nome"? "Bom Jesus do Itabapoana":attr=="regiao"?1:"BomJesusdoItabapoana";},
-	                  330070:function(attr){return attr=="aisp"?"AISP 25":attr=="nome"? "Cabo Frio":attr=="regiao"?4:"CaboFrio";},
-	                  330080:function(attr){return attr=="aisp"?"AISP 35":attr=="nome"? "Cachoeiras de Macacu":attr=="regiao"?0:"CachoeirasdeMacacu";},
-	                  330090:function(attr){return attr=="aisp"?"AISP 36":attr=="regiao"?1:"Cambuci";},
-	                  330093:function(attr){return attr=="aisp"?"AISP 32":attr=="regiao"?2:"Carapebus";},
-	                  330095:function(attr){return attr=="aisp"?"AISP 38":attr=="nome"? "Comendador Levy Gasparian":attr=="regiao"?6:"ComendadorLevyGasparian";},
-	                  330100:function(attr){return attr=="aisp"?"AISP 08":attr=="nome"? "Campos dos Goytacazes":attr=="regiao"?2:"CamposdosGoytacazes";},
-	                  330110:function(attr){return attr=="aisp"?"AISP 11":attr=="regiao"?3:"Cantagalo";},
-	                  330115:function(attr){return attr=="aisp"?"AISP 29":attr=="nome"? "Cardoso Moreira":attr=="regiao"?2:"CardosoMoreira";},
-	                  330120:function(attr){return attr=="aisp"?"AISP 30":attr=="regiao"?3:"Carmo";},
-	                  330130:function(attr){return attr=="aisp"?"AISP 32":attr=="nome"? "Casimiro de Abreu":attr=="regiao"?4:"CasimirodeAbreu";},
-	                  330140:function(attr){return attr=="aisp"?"AISP 32":attr=="nome"? "Conceição de Macabu":attr=="regiao"?2:"ConceicaodeMacabu";},
-	                  330150:function(attr){return attr=="aisp"?"AISP 11":attr=="regiao"?3:"Cordeiro";},
-	                  330160:function(attr){return attr=="aisp"?"AISP 11":attr=="nome"? "Duas Barras":attr=="regiao"?3:"DuasBarras";},
-	                  330170:function(attr){return attr=="aisp"?"AISP 15":attr=="nome"? "Duque de Caxias":attr=="regiao"?0:"DuquedeCaxias";},
-	                  330180:function(attr){return attr=="aisp"?"AISP 10":attr=="nome"? "Engenheiro Paulo de Frontin":attr=="regiao"?6:"PaulodeFrontin";},
-	                  330185:function(attr){return attr=="aisp"?"AISP 34":attr=="regiao"?0:"Guapimirim";},
-	                  330187:function(attr){return attr=="aisp"?"AISP 25":attr=="nome"? "Iguaba Grande":attr=="regiao"?4:"IguabaGrande";},
-	                  330190:function(attr){return attr=="aisp"?"AISP 35":attr=="regiao"?0:"Itaboraí";},
-	                  330200:function(attr){return attr=="aisp"?"AISP 24":attr=="regiao"?0:"Itaguaí";},
-	                  330205:function(attr){return attr=="aisp"?"AISP 29":attr=="regiao"?1:"Italva";},
-	                  330210:function(attr){return attr=="aisp"?"AISP 36":attr=="regiao"?1:"Itaocara";},
-	                  330220:function(attr){return attr=="aisp"?"AISP 29":attr=="regiao"?1:"Itaperuna";},
-	                  330420:function(attr){return attr=="aisp"?"AISP 37":attr=="regiao"?5:"Itatiaia";},
-	                  330227:function(attr){return attr=="aisp"?"AISP 24":attr=="regiao"?0:"Japeri";},
-	                  330230:function(attr){return attr=="aisp"?"AISP 29":attr=="nome"? "Laje do Muriaé":attr=="regiao"?1:"LajedoMuriae";},
-	                  330240:function(attr){return attr=="aisp"?"AISP 32":attr=="regiao"?2:"Macaé";},
-	                  330245:function(attr){return attr=="aisp"?"AISP 11":attr=="regiao"?3:"Macuco";},
-	                  330250:function(attr){return attr=="aisp"?"AISP 34":attr=="regiao"?0:"Magé";},
-	                  330260:function(attr){return attr=="aisp"?"AISP 33":attr=="regiao"?7:"Mangaratiba";},
-	                  330270:function(attr){return attr=="aisp"?"AISP 12":attr=="regiao"?0:"Maricá";},
-	                  330280:function(attr){return attr=="aisp"?"AISP 10":attr=="regiao"?6:"Mendes";},
-	                  330285:function(attr){return attr=="aisp"?"AISP 20":attr=="regiao"?0:"Mesquita";},
-	                  330290:function(attr){return attr=="aisp"?"AISP 10":attr=="nome"? "Miguel Pereira":attr=="regiao"?6:"MiguelPereira";},
-	                  330300:function(attr){return attr=="aisp"?"AISP 36":attr=="regiao"?1:"Miracema";},
-	                  330310:function(attr){return attr=="aisp"?"AISP 29":attr=="regiao"?1:"Natividade";},
-	                  330320:function(attr){return attr=="aisp"?"AISP 20":attr=="regiao"?0:"Nilópolis";},
-	                  330330:function(attr){return attr=="aisp"?"AISP 12":attr=="regiao"?0:"Niterói";},
-	                  330340:function(attr){return attr=="aisp"?"AISP 11":attr=="nome"? "Nova Friburgo":attr=="regiao"?3:"NovaFriburgo";},
-	                  330350:function(attr){return attr=="aisp"?"AISP 20":attr=="nome"? "Nova Iguaçu":attr=="regiao"?0:"NovaIguaçu";},
-	                  330360:function(attr){return attr=="aisp"?"AISP 24":attr=="regiao"?0:"Paracambi";},
-	                  330370:function(attr){return attr=="aisp"?"AISP 38":attr=="nome"? "Paraíba do Sul":attr=="regiao"?6:"ParaibadoSul";},
-	                  330380:function(attr){return attr=="aisp"?"AISP 33":attr=="regiao"?7:"Paraty";},
-	                  330385:function(attr){return attr=="aisp"?"AISP 10":attr=="nome"? "Paty do Alferes":attr=="regiao"?6:"PatydoAlferes";},
-	                  330390:function(attr){return attr=="aisp"?"AISP 26":attr=="regiao"?3:"Petrópolis";},
-	                  330395:function(attr){return attr=="aisp"?"AISP 28":attr=="regiao"?5:"Pinheiral";},
-	                  330400:function(attr){return attr=="aisp"?"AISP 10":attr=="regiao"?5:"Piraí";},
-	                  330410:function(attr){return attr=="aisp"?"AISP 29":attr=="regiao"?1:"Porciúncula";},
-	                  330411:function(attr){return attr=="aisp"?"AISP 37":attr=="nome"? "Porto Real":attr=="regiao"?5:"PortoReal";},
-	                  330412:function(attr){return attr=="aisp"?"AISP 37":attr=="regiao"?5:"Quatis";},
-	                  330414:function(attr){return attr=="aisp"?"AISP 24":attr=="regiao"?0:"Queimados";},
-	                  330415:function(attr){return attr=="aisp"?"AISP 32":attr=="regiao"?2:"Quissamã";},
-	                  330420:function(attr){return attr=="aisp"?"AISP 37":attr=="regiao"?5:"Resende";},
-	                  330430:function(attr){return attr=="aisp"?"AISP 35":attr=="nome"? "Rio Bonito":attr=="regiao"?0:"RioBonito";},
-	                  330440:function(attr){return attr=="aisp"?"AISP 33":attr=="nome"? "Rio Claro":attr=="regiao"?5:"RioClaro";},
-	                  330450:function(attr){return attr=="aisp"?"AISP 10":attr=="nome"? "Rio das Flores":attr=="regiao"?5:"RiodasFlores";},
-	                  330452:function(attr){return attr=="aisp"?"AISP 32":attr=="nome"? "Rio das Ostras":attr=="regiao"?4:"RiodasOstras";},
-	                  330455:function(attr){return attr=="aisp"?"AISP 02 AISP 39 AISP 27 AISP 31 AISP 14 AISP 18 AISP 23 AISP 06 AISP 03 AISP 09 AISP 41 AISP 19 AISP 05 AISP 04 AISP 22 AISP 16 AISP 17":attr=="nome"? "Rio de Janeiro":attr=="regiao"?0:"RiodeJaneiro";},
-	                  330460:function(attr){return attr=="aisp"?"AISP 11":attr=="nome"? "Santa Maria Madalena":attr=="regiao"?3:"SantaMariaMadalena";},
-	                  330470:function(attr){return attr=="aisp"?"AISP 36":attr=="nome"? "Santo Antônio de Pádua":attr=="regiao"?1:"SantoAntoniodePadua";},
-	                  330475:function(attr){return attr=="aisp"?"AISP 08":attr=="nome"? "São Francisco de Itabapoana":attr=="regiao"?2:"SãoFranciscodeItabapoana";},
-	                  330480:function(attr){return attr=="aisp"?"AISP 08":attr=="nome"? "São Fidélis":attr=="regiao"?2:"SãoFidélis";},
-	                  330490:function(attr){return attr=="aisp"?"AISP 07":attr=="nome"? "São Gonçalo":attr=="regiao"?0:"SãoGonçalo";},
-	                  330500:function(attr){return attr=="aisp"?"AISP 08":attr=="nome"? "São João da Barra":attr=="regiao"?2:"SãoJoãodaBarra";},
-	                  330510:function(attr){return attr=="aisp"?"AISP 21":attr=="nome"? "São João de Meriti":attr=="regiao"?0:"SãoJoãodeMeriti";},
-	                  330513:function(attr){return attr=="aisp"?"AISP 29":attr=="nome"? "São José de Ubá":attr=="regiao"?1:"SãoJosédeUbá";},
-	                  330515:function(attr){return attr=="aisp"?"AISP 30":attr=="nome"? "São José do Vale do Rio Preto":attr=="regiao"?3:"SãoJosédoValedoRioPreto";},
-	                  330520:function(attr){return attr=="aisp"?"AISP 25":attr=="nome"? "São Pedro da Aldeia":attr=="regiao"?4:"SãoPedrodaAldeia";},
-	                  330530:function(attr){return attr=="aisp"?"AISP 36":attr=="nome"? "São Sebastião do Alto":attr=="regiao"?3:"SãoSebastiãodoAlto";},
-	                  330540:function(attr){return attr=="aisp"?"AISP 38":attr=="regiao"?6:"Sapucaia";},
-	                  330550:function(attr){return attr=="aisp"?"AISP 25":attr=="regiao"?4:"Saquarema";},
-	                  330555:function(attr){return attr=="aisp"?"AISP 24":attr=="regiao"?0:"Seropédica";},
-	                  330560:function(attr){return attr=="aisp"?"AISP 35":attr=="nome"? "Silva Jardim":attr=="regiao"?4:"SilvaJardim";},
-	                  330570:function(attr){return attr=="aisp"?"AISP 30":attr=="regiao"?3:"Sumidouro";},
-	                  330575:function(attr){return attr=="aisp"?"AISP 35":attr=="regiao"?0:"Tanguá";},
-	                  330580:function(attr){return attr=="aisp"?"AISP 30":attr=="regiao"?3:"Teresópolis";},
-	                  330590:function(attr){return attr=="aisp"?"AISP 11":attr=="nome"? "Trajano de Moraes":attr=="regiao"?3:"TrajanodeMoraes";},
-	                  330600:function(attr){return attr=="aisp"?"AISP 38":attr=="nome"? "Três Rios":attr=="regiao"?6:"TrêsRios";},
-	                  330610:function(attr){return attr=="aisp"?"AISP 10":attr=="regiao"?5:"Valença";},
-	                  330615:function(attr){return attr=="aisp"?"AISP 29":attr=="regiao"?1:"Varre-Sai";},
-	                  330620:function(attr){return attr=="aisp"?"AISP 10":attr=="regiao"?6:"Vassouras";},
-	                  330630:function(attr){return attr=="aisp"?"AISP 28":attr=="nome"? "Volta Redonda":attr=="regiao"?5:"VoltaRedonda";} };
-	  try {
-	    if (isNaN(code)) {
-	      if (attr="nome")
-	        if (cdmun2id[330455]("aisp").match(code))
-	          return "AISP RJ"
-	      if (cl_hashAisps[code])
-	        return code;
-	      return undefined;
-	    }
-	    return cdmun2id[code](attr);
-	  }
-	  catch (err) {
-	    return undefined;
-	  }
-	
-	}
 	
 	cl.aisp = function (attr, code) {
 	  var aispnum2id = {
@@ -600,6 +491,18 @@
 	  cl_build_Aisps();
       cl.mapaCores();
 	  var mapa;
+
+	  	    cl.dsv("./csv/NomeDPs.csv",  function(dados) {
+	          return {
+	            AISP: +dados.AISP,
+	            DP: +dados.DP,
+	            UP: dados.UP
+	          }; }, function(dados) {
+	          cl.nomeDP = {};
+	          var i;
+	          for (i = 0; i < dados.length; i++)
+	            cl.nomeDP[dados[i].DP] = { up: dados[i].UP, aisp: dados[i].AISP };
+	        });
 	
 	  cl.ajustaCaso = function(nome) {
 	    function toTitleCase(str) {
@@ -642,7 +545,7 @@
 	      .attr("d", path)
 	      .text(function(d){ return cl.aisp("nome", d.properties.DP)});
 	
-	    cl.leuJson = "sim";
+	  cl.leuJson = "sim";
       cl.titulo(TITULORIO);
 	    hookTooltip();
 	    //cl.todasRISPS();
@@ -674,6 +577,7 @@
 	        for (i = 0; i < c.length; i++) {
 	          hashCoordenadas[c[i].cdmun] = [c[i].lon, c[i].lat];
 	        }
+	        /*
 	        cl.dsv("./csv/NomeDPs.csv",  function(dados) {
 	          return {
 	            AISP: +dados.AISP,
@@ -685,6 +589,7 @@
 	          for (i = 0; i < dados.length; i++)
 	            cl.nomeDP[dados[i].DP] = { up: dados[i].UP, aisp: dados[i].AISP };
 	        });
+	        */
           var mvG = d3.select(".mvG");
           botaoISP(mvG, 255, 565, "RISP", cl_textoRISP, TODASRISPS, "spRect1", cl.todasRISPS);
           botaoISP(mvG, 335, 565, "AISP", cl_textoAISP, TODASAISPS, "spRect2", cl.todasAISPS);
@@ -728,31 +633,51 @@
 	var regiaoAtual = -1;
 	
 	cl.pintaMapa = function() {
-	  var dados = [],
+	  var INICIOX = 10, TAMANHOX = 125,
+	  	  dados = [],
 	  	  distribuicao = "linear",
 	  	  tipo = "",
 	  	  rangeData = [],
 	  	  tit = "",
 	  	  faixas = 0,
 	  	  ano,
+	  	  totMes = {},
 	  	  totais = {};
 
 	  var i;
 	  var min, max;
-	  cl.hashDados = {};
+
+	  var dadosLinha = [];
+	  for (i = 0; i < 36; i++)
+	  	dadosLinha.push([i,Math.random()*72]);
+
+
+	  //d3.select("svg").append("path").attrd(d)
+	  //d3.select("svg").append("path").datum(dadosLinha).attr("class", "linha").attr("d", linha);
+	  
 
 	  function pintaMapa() {
 	  	  var domEixo = [], rangEixo = [];
+	  	  var x = d3.scale.linear().domain([0,36]).range([INICIOX, 3*TAMANHOX+INICIOX]),
+	  	  y = d3.scale.linear().domain([0,600]).range([150, 110]),
+	  	  linha = d3.svg.line().x(function(d,i){return x(d[0]);}).y(function(d,i){return y(d[1])});
+
 
 	  	  d3.select("g.legenda").remove();
-
 	  	  d3.selectAll(".ano").remove();
+	  	  d3.select("div#selecionaClasse").style("display", "block");
+	  	  d3.selectAll(".linha").remove();
+	  	  y.domain([d3.min(totMes, function(d){return d[1];}), d3.max(totMes, function(d){return d[1];})]);
+		  d3.select("svg").append("path").datum(totMes).attr({"class":"linha", "d":linha}).style("fill", "none");
+	  	  for (i=0;i<4;i++)
+	  	  	d3.select("svg").append("circle").attr({"cx":x(totMes[i*12][0]), "cy":y(totMes[i*12][1]), "r":2, "class":"linha"}).style({"fill": "steelblue", "stroke":"none"});
+	  	  
 	  	  i = 0;
 	  	  for(j in dados) {
 	  	  	d3.select("svg")
 	  	  		.append("text")
 	  	  		.attr("class", "ano c"+j)
-	  	  		.attr({"x":20+i*140, "y":100})
+	  	  		.attr({"x":INICIOX+i*TAMANHOX, "y":100})
 	  	  		.text(j)
 	  	  		.datum(j);
 	  	  	d3.select(".c"+j)
@@ -768,7 +693,7 @@
 	  	  		})
     			.on("mouseover", function(d) {
     				if (d != ano) {
-				        cl.tooltip.html("Clique para ver os dados de "+d);
+				        cl.tooltip.html(["Clique para ver os dados de "+d, "Click to see "+d+" data"][lang]);
 				        return cl.tooltip.style("visibility", "visible");
 			    	}
 			    	return;
@@ -788,15 +713,6 @@
 	  	  }
 
 	      cl.status = tipo;
-	      totais = {};
-		  for (j in dados) {
-		  	cl.hashDados[j] = {};
-		  	totais[j] = 0;
-		  	for (i = 0; i < dados[j].length; i++) {
-		    	cl.hashDados[j][dados[j][i][0]] = dados[j][i][1];
-		    	totais[j] += dados[j][i][1];
-			  }
-		  }
 
 		  d3.select(".c"+ano).style("fill", "steelblue");
 		  min = rangeData[0];
@@ -884,8 +800,19 @@
 		}
 // 	cl.pintaMapa = function(dados, distribuicao, tipo, rangeData, tit, faixas)
 		pintaMapa.dados = function(valor) {
+			var j;
       		if(!arguments.length) return dados;
       		dados = valor;
+      		totais = {};
+      		cl.hashDados = {};
+		  	for (j in dados) {
+		  		cl.hashDados[j] = {};
+		  		totais[j] = 0;
+		  		for (i = 0; i < dados[j].length; i++) {
+		    		cl.hashDados[j][dados[j][i][0]] = dados[j][i][1];
+		    		totais[j] += dados[j][i][1];
+			  	}
+		  	}
       		return pintaMapa;
     	};
 
@@ -925,6 +852,12 @@
       		cl.atual = ano;
       		return pintaMapa;
     	};
+
+    	pintaMapa.totMes = function(valor) {
+    		if (!arguments.length) return totMes;
+    		totMes = valor;
+    		return pintaMapa;
+    	}
 
     	return pintaMapa;
 	};
@@ -1084,7 +1017,7 @@
 	cl.todasAISPS = function(){
 	  cl.status = "aisps";
 	  d3.select("g.legenda").remove();
-	  cl.hashDados[cl.atual] = {};
+	  //cl.hashDados[cl.atual] = {};
     apagaRange();
 	  
     d3.selectAll("path.cisp")
@@ -1115,7 +1048,7 @@
 	cl.todasRISPS = function(){
 	  cl.status = "risps";
 	  d3.select("g.legenda").remove();
-    cl.hashDados[cl.atual] = {};
+     //cl.hashDados[cl.atual] = {};
 	  apagaRange();
 
 	  d3.selectAll("path.cisp")
@@ -1142,7 +1075,7 @@
   cl.todasDPS = function(){
     cl.status = "cisps";
     d3.select("g.legenda").remove();
-    cl.hashDados[cl.atual] = {};
+    //cl.hashDados[cl.atual] = {};
     apagaRange();
 
     d3.selectAll("path.cisp")
@@ -1206,7 +1139,7 @@
 	        k += ": "+cl.hashDados[cl.atual][d.properties.AISP].toLocaleString();
       //k+="<br>"+cl.dp(d.properties.DP);
       if (cl.status == "cisp" && cl.hashDados[cl.atual][d.properties.DP] != undefined)
-        k += "<br>"+cl.dp(d.properties.DP)+": "+cl.hashDados[cl.atual][d.properties.DP].toLocaleString()+"<br>"+cl.nomeDP[d.properties.DP].up;
+        k += "<br>"+cl.dp(d.properties.DP)+": "+cl.hashDados[cl.atual][d.properties.DP].toLocaleString() + [" casos", " cases"][lang]+"<br>"+cl.nomeDP[d.properties.DP].up;
       else
       	k+="<br>"+cl.dp(d.properties.DP)+": "+cl.nomeDP[d.properties.DP].up;
 
