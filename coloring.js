@@ -257,30 +257,31 @@
 	/*
 	 * Depuração e geração de vetores internos
 	 */
-	var codMunOrd =[330010, 330015, 330020, 330022,
-	                330023, 330025, 330030, 330040,
-	                330045, 330050, 330060, 330070,
-	                330080, 330090, 330093, 330095,
-	                330100, 330110, 330115, 330120,
-	                330130, 330140, 330150, 330160,
-	                330170, 330180, 330185, 330187,
-	                330190, 330200, 330205, 330210,
-	                330220, 330225, 330227, 330230,
-	                330240, 330245, 330250, 330260,
-	                330270, 330280, 330285, 330290,
-	                330300, 330310, 330320, 330330,
-	                330340, 330350, 330360, 330370,
-	                330380, 330385, 330390, 330395,
-	                330400, 330410, 330411, 330412,
-	                330414, 330415, 330420, 330430,
-	                330440, 330450, 330452, 330455,
-	                330460, 330470, 330475, 330480,
-	                330490, 330500, 330510, 330513,
-	                330515, 330520, 330530, 330540,
-	                330550, 330555, 330560, 330570,
-	                330575, 330580, 330590, 330600,
-	                330610, 330615, 330620, 330630];              
+          
 	function geraVetor(dados, prefixo){
+		var codMunOrd =[330010, 330015, 330020, 330022,
+	            330023, 330025, 330030, 330040,
+	            330045, 330050, 330060, 330070,
+	            330080, 330090, 330093, 330095,
+	            330100, 330110, 330115, 330120,
+	            330130, 330140, 330150, 330160,
+	            330170, 330180, 330185, 330187,
+	            330190, 330200, 330205, 330210,
+	            330220, 330225, 330227, 330230,
+	            330240, 330245, 330250, 330260,
+	            330270, 330280, 330285, 330290,
+	            330300, 330310, 330320, 330330,
+	            330340, 330350, 330360, 330370,
+	            330380, 330385, 330390, 330395,
+	            330400, 330410, 330411, 330412,
+	            330414, 330415, 330420, 330430,
+	            330440, 330450, 330452, 330455,
+	            330460, 330470, 330475, 330480,
+	            330490, 330500, 330510, 330513,
+	            330515, 330520, 330530, 330540,
+	            330550, 330555, 330560, 330570,
+	            330575, 330580, 330590, 330600,
+	            330610, 330615, 330620, 330630];    
 	  var i, varList = prefixo;
 	  for (i = 0; i<dados.length; i++)
 	    varList = varList + "["+codMunOrd[i]+","+dados[i]+"],";
@@ -490,7 +491,6 @@
 	  cl.leuJson = "não";
 	  cl_build_Aisps();
       cl.mapaCores();
-	  var mapa;
 
 	  	    cl.dsv("./csv/NomeDPs.csv",  function(dados) {
 	          return {
@@ -630,7 +630,6 @@
 	cl.hashDados = {};
 	var hashCoordenadas = {};
 	var hashRegioes = {};
-	var regiaoAtual = -1;
 	
 	cl.pintaMapa = function() {
 	  var INICIOX = 10, TAMANHOX = 125,
@@ -657,7 +656,7 @@
 	  
 
 	  function pintaMapa() {
-	  	  var domEixo = [], rangEixo = [];
+	  	  var domEixo = [];
 	  	  var x = d3.scale.linear().domain([0,36]).range([INICIOX, 3*TAMANHOX+INICIOX]),
 	  	  y = d3.scale.linear().domain([0,600]).range([150, 110]),
 	  	  linha = d3.svg.line().x(function(d,i){return x(d[0]);}).y(function(d,i){return y(d[1])});
@@ -667,8 +666,8 @@
 	  	  d3.selectAll(".ano").remove();
 	  	  d3.select("div#selecionaClasse").style("display", "block");
 	  	  d3.selectAll(".linha").remove();
-	  	  y.domain([d3.min(totMes, function(d){return d[1];}), d3.max(totMes, function(d){return d[1];})]);
-		  d3.select("svg").append("path").datum(totMes).attr({"class":"linha", "d":linha}).style("fill", "none");
+	  	  y.domain(d3.extent(totMes, function(d){return d[1];}));
+		  d3.select("svg").append("path").datum(totMes).attr({"class":"linha grf", "d":linha}).style("fill", "none");
 	  	  for (i=0;i<4;i++)
 	  	  	d3.select("svg").append("circle").attr({"cx":x(totMes[i*12][0]), "cy":y(totMes[i*12][1]), "r":2, "class":"linha"}).style({"fill": "steelblue", "stroke":"none"});
 	  	  
@@ -718,7 +717,6 @@
 		  min = rangeData[0];
 		  max = rangeData[1];
 		  cl.titulo(tit + " (" + totais[ano].toLocaleString() + ")" );
-		  var domainMap = [min, max];
 		  switch(distribuicao) {
 		    case 'sqrt':
 		      // cl.cor é a cor selecionada em rangeMap de um valor no domínio domainMap
@@ -862,12 +860,6 @@
     	return pintaMapa;
 	};
 
-  function inverso (vetor) {
-    var vet=[];
-    for (var i=vetor.length-1; i>=0; i--)
-      vet.push([vetor[i]]);
-    return vet;
-  }
 
   function cl_criaTipLegenda(){
     //var g = d3.select(".legenda").selectAll("rect");
@@ -907,113 +899,6 @@
       });
   }
 	
-	function recolheCapitais(regiao)
-	{
-	  // Recolhe as capitais de todas as regiões menos a atual
-	  d3.selectAll("circle").filter(function (d,i) { return hashRegioes[d.cdmun]!=regiao;})
-	//  d3.selectAll("circle."+cl.classeRegiao[regiao-1])
-	    .transition()
-	    .duration(500)
-	    .ease("cubic-in-out")
-	    .attr("r", (1.5 / cl.escalaPrj) + "px")
-	    .attr("cx", function(dd) { return projecao(hashCoordenadas[dd.cdmun])[0];})
-	    .attr("cy", function(dd) { return projecao(hashCoordenadas[dd.cdmun])[1];})
-	  d3.select("svg").select("g.mvG").select("g.infoMun").remove();
-	  
-	}
-	function enviaCapitais(regiao, titulo)
-	{
-	  // Distribui os pontos menos o da região atual
-	  d3.selectAll("circle").filter(function (d,i) { return hashRegioes[d.cdmun]!=regiao;})
-	//  d3.selectAll("circle."+cl.classeRegiao[regiao-1])
-	    .transition()
-	    .duration(500)
-	    .ease("cubic-in-out")
-	    .attr({r:"7", cx: "20", cy: "20"});
-	//Escreve o título
-	  d3.select("svg").select("g.mvG").append("g")
-	    .attr({class: "infoMun", transform: "translate(35,5)"})
-	    .append("text")
-	    .attr({class: "titulo1", y:"24"})
-	    .transition()
-	    .delay(500)
-	    .text(titulo?titulo:cl.nomeRegiao[regiao]);
-	}
-	/*
-	// Pinta uma Região
-	cl.selecionaRegiao = function(regiao)
-	{
-	  cl.status = "região";
-	  d3.select("g.legenda").remove();
-	  cl.regiaoSelecao = regiao;
-	  cl.hashDados = {};
-	  svg.selectAll("path")
-	    .transition()
-	    .duration(1000)
-	    .delay(100)
-	    .ease("cubic-in-out")
-	    .style("fill", function(d) {
-	      if (cl.nid("regiao", d.properties.cdmun) == regiao-1)
-	        return cl.hashDados[d.properties.cdmun] = cl.corRegioes[regiao-1];
-	      else
-	        return cl.hashDados[d.properties.cdmun] = "steelblue";
-	      });
-	
-	  d3.selectAll(".bar")
-	    .transition()
-	    .duration(1000)
-	    .delay(100)
-	    .ease("cubic-in-out")
-	    .style("fill", function(d){
-	      if (cl.nid("regiao", +d[0]) == regiao-1)
-	        if (cl.status == "mapa")
-	          return cl.cor(d[1]);
-	        else
-	          return cl.corRegioes[regiao-1];
-	      else
-	        return cl.semInfo;
-	    });
-	
-	  if (regiaoAtual != regiao) { // Se mudou de região
-	    if (regiaoAtual != -1) { // Recolhe os pontos da região anterior
-	      //recolheCapitais(regiaoAtual);
-	    }
-	    //enviaCapitais(regiao-1);
-	    regiaoAtual = regiao-1;
-	  }    
-	}
-	//Pinta todas Regiões
-	cl.todasRegioes = function(){
-	
-	  d3.select("g.legenda").remove();
-	  cl.hashDados = {};
-	  if (regiaoAtual != -1) {
-	    //recolheCapitais(regiaoAtual);
-	    regiaoAtual = -1;
-	  }
-	  svg.selectAll("path")
-	    .transition()
-	    .duration(1000)
-	    .delay(100)
-	    .ease("cubic-in-out")
-	    .style("fill", function(d) {
-	    return cl.hashDados[d.properties.cdmun] = cl.corRegioes[cl.nid("regiao", d.properties.cdmun)];
-	  });
-	    /*
-	  d3.selectAll(".bar")
-	    .transition()
-	    .duration(1000)
-	    .delay(100)
-	    .ease("cubic-in-out")
-	    .style("fill", function(d){
-	      for (var i = 0; i<cl.aisps.length; i++)
-	        if (d[0] == cl.aisps[i])
-	          return cl.corAisps[i];
-	    });
-	*//*
-	  cl.status = "região";
-	};
-	*/
 	cl.todasAISPS = function(){
 	  cl.status = "aisps";
 	  d3.select("g.legenda").remove();
@@ -1096,24 +981,6 @@
           return cl.cores[d[0]];
         });
   };
-	// Obsoleta
-	function apagaClasseRegiao()
-	{ 
-	  svg.selectAll("path").classed("metropolitana costaverde medioparaiba centro-sul serrana baixadaslitoraneas nortefluminense noroestefluminense", false);
-	}
-	// Obsoleta
-	function ativaClasseRegiao(regIndex)
-	{
-	  svg.selectAll("path").classed(cl.classeRegiao[regIndex-1],
-	                                function(d) { return d.properties.cdrgigov==regIndex; });
-	}
-	// Obsoleta
-	function ativaClasseTodasRegioes()
-	{
-	  svg.selectAll("path")
-	    .attr("class", function(d) {return "municipio "+cl.classeRegiao[d.properties.cdrgigov-1]});
-	}
-	
 	// Cria o maptip, formato html (pode ser interessante incluir a bandeira do município ou outros
 	// elementos gráficos de pequeno impacto visual no tooltip)
 	function criaTooltip()
@@ -1132,7 +999,7 @@
 	
 	  .on("mouseover", function(d){
 	    var tip = d3.select("div.myTip");
-	    var k, barra, corBarra;
+	    var k;
 	
 	    k = "RISP "+cl.aisp("risp", d.properties.AISP)+"<br>"+cl.aisp("nome", d.properties.AISP);
 	     if (cl.status == "aisp" && cl.hashDados[cl.atual][d.properties.AISP] != undefined) 

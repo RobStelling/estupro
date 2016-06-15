@@ -7,7 +7,7 @@ lang = window.navigator.userLanguage || window.navigator.language == "pt-BR" ? 0
 
 if (lang) {
   d3.select("#tituloPagina").html("Rape cases in Rio de Janeiro since 2013 to April 2016");
-  d3.select("#comentario").html("2016 numbers based on January/16 to April/16 average");
+  d3.select("#comentario").html("2016 numbers based on January to April 2016 average");
   d3.select("#vejaTambem").html('See also: <a href="/impeachment" id="linkAlternativo">Brazil Impeachment Voting 2016</a>');
   d3.select("#tabMapa").html("Map");
   d3.select("#tabHistograma").html("Histogram");
