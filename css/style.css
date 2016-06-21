@@ -140,7 +140,7 @@ circle {
 }
 .linha {
   /*fill: none; */
-  stroke: #666666;
+//  stroke: #666666;
   stroke-linejoin: round;
   stroke-linecap: round;
 }

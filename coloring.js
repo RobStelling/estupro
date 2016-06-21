@@ -254,40 +254,6 @@
     }
   };
 
-	/*
-	 * Depuração e geração de vetores internos
-	 */
-          
-	function geraVetor(dados, prefixo){
-		var codMunOrd =[330010, 330015, 330020, 330022,
-	            330023, 330025, 330030, 330040,
-	            330045, 330050, 330060, 330070,
-	            330080, 330090, 330093, 330095,
-	            330100, 330110, 330115, 330120,
-	            330130, 330140, 330150, 330160,
-	            330170, 330180, 330185, 330187,
-	            330190, 330200, 330205, 330210,
-	            330220, 330225, 330227, 330230,
-	            330240, 330245, 330250, 330260,
-	            330270, 330280, 330285, 330290,
-	            330300, 330310, 330320, 330330,
-	            330340, 330350, 330360, 330370,
-	            330380, 330385, 330390, 330395,
-	            330400, 330410, 330411, 330412,
-	            330414, 330415, 330420, 330430,
-	            330440, 330450, 330452, 330455,
-	            330460, 330470, 330475, 330480,
-	            330490, 330500, 330510, 330513,
-	            330515, 330520, 330530, 330540,
-	            330550, 330555, 330560, 330570,
-	            330575, 330580, 330590, 330600,
-	            330610, 330615, 330620, 330630];    
-	  var i, varList = prefixo;
-	  for (i = 0; i<dados.length; i++)
-	    varList = varList + "["+codMunOrd[i]+","+dados[i]+"],";
-	  console.log(varList);
-	
-	}
 	
 	cl.nomeRegiao = ["Região Metropolitana", "Região Noroeste Fluminense", "Região Norte Fluminense", "Região Serrana", "Região das Baixadas Litorâneas", "Região do Médio Paraiba", "Região Centro-sul", "Região da Costa Verde"];
 	cl.classeRegiao = ["metropolitana", "noroestefluminense", "nortefluminense", "serrana", "baixadaslitoraneas", "medioparaiba", "centro-sul", "costaverde"];
@@ -313,6 +279,22 @@
       9:["#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850"],
       10:["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"],
       11:["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"]},
+    Oranges:{3:["#fee6ce","#fdae6b","#e6550d"],
+		4:["#feedde","#fdbe85","#fd8d3c","#d94701"],
+		5:["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"],
+		6:["#feedde","#fdd0a2","#fdae6b","#fd8d3c","#e6550d","#a63603"],
+		7:["#feedde","#fdd0a2","#fdae6b","#fd8d3c","#f16913","#d94801","#8c2d04"],
+		8:["#fff5eb","#fee6ce","#fdd0a2","#fdae6b","#fd8d3c","#f16913","#d94801","#8c2d04"],
+		9:["#fff5eb","#fee6ce","#fdd0a2","#fdae6b","#fd8d3c","#f16913","#d94801","#a63603","#7f2704"]
+	},
+    Reds:{3:["#fee0d2","#fc9272","#de2d26"],
+		4:["#fee5d9","#fcae91","#fb6a4a","#cb181d"],
+		5:["#fee5d9","#fcae91","#fb6a4a","#de2d26","#a50f15"],
+		6:["#fee5d9","#fcbba1","#fc9272","#fb6a4a","#de2d26","#a50f15"],
+		7:["#fee5d9","#fcbba1","#fc9272","#fb6a4a","#ef3b2c","#cb181d","#99000d"],
+		8:["#fff5f0","#fee0d2","#fcbba1","#fc9272","#fb6a4a","#ef3b2c","#cb181d","#99000d"],
+		9:["#fff5f0","#fee0d2","#fcbba1","#fc9272","#fb6a4a","#ef3b2c","#cb181d","#a50f15","#67000d"]
+	},
 	OrRd:{3:["#fee8c8","#fdbb84","#e34a33"],
 		4:["#fef0d9","#fdcc8a","#fc8d59","#d7301f"],
 		5:["#fef0d9","#fdcc8a","#fc8d59","#e34a33","#b30000"],
@@ -327,8 +309,21 @@
 	  7:["#ffffb2","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#b10026"],
 	  8:["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#b10026"],
 	  9:["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"]},
-    Paired:{12:["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"]},
+    Paired:{3:["#a6cee3","#1f78b4","#b2df8a"],
+		4:["#a6cee3","#1f78b4","#b2df8a","#33a02c"],
+		5:["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99"],
+    	12:["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"]},
     Dark2:{8:["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"]},
+    RdBu:{3:["#ef8a62","#f7f7f7","#67a9cf"],
+		4:["#ca0020","#f4a582","#92c5de","#0571b0"],
+		5:["#ca0020","#f4a582","#f7f7f7","#92c5de","#0571b0"],
+		6:["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"],
+		7:["#b2182b","#ef8a62","#fddbc7","#f7f7f7","#d1e5f0","#67a9cf","#2166ac"],
+		8:["#b2182b","#d6604d","#f4a582","#fddbc7","#d1e5f0","#92c5de","#4393c3","#2166ac"],
+		9:["#b2182b","#d6604d","#f4a582","#fddbc7","#f7f7f7","#d1e5f0","#92c5de","#4393c3","#2166ac"],
+		10:["#67001f","#b2182b","#d6604d","#f4a582","#fddbc7","#d1e5f0","#92c5de","#4393c3","#2166ac","#053061"],
+		11:["#67001f","#b2182b","#d6604d","#f4a582","#fddbc7","#f7f7f7","#d1e5f0","#92c5de","#4393c3","#2166ac","#053061"]
+	},
 	RdYlBu:{
 		3:["#fc8d59","#ffffbf","#91bfdb"],
 		4:["#d7191c","#fdae61","#abd9e9","#2c7bb6"],
@@ -442,7 +437,7 @@
 	    d3.format = brasil.numberFormat;
 	
 	  projecao =
-	    d3.geo.conicEqualArea().center([0,-21.85]).rotate([42.50, 0])
+	    d3.geo.conicEqualArea().center([-0.375,-21.7]).rotate([42.50, 0])
 	    .parallels([-21.05,-23.05]).scale(12000);
 	
 	  //projecao = d3.geo.mercator().scale(10500).translate([8250, -3900]);
@@ -622,7 +617,7 @@
 	    .remove();
 	  // Inclui novo titulo
 	  svg.append("g")
-	    .attr({class: "titulo1", transform: "translate(10,145)"})
+	    .attr({class: "titulo1", transform: "translate(70,220)"})
 	    .append("text").attr({class: "caption", y: 80}).text(leg);
 	};
 	
@@ -640,7 +635,8 @@
 	  	  tit = "",
 	  	  faixas = 0,
 	  	  ano,
-	  	  totMes = {},
+	  	  sparkline = {},
+	  	  referencia = undefined,
 	  	  totais = {};
 
 	  var i;
@@ -656,9 +652,10 @@
 	  
 
 	  function pintaMapa() {
-	  	  var domEixo = [];
-	  	  var x = d3.scale.linear().domain([0,36]).range([INICIOX, 3*TAMANHOX+INICIOX]),
-	  	  y = d3.scale.linear().domain([0,600]).range([150, 110]),
+	  	  var domEixo = [], dominioSparkline = [];
+	  	  var x = d3.scale.linear().domain([0,48]).range([INICIOX, 4*TAMANHOX+INICIOX]),
+	  	  y = d3.scale.linear().domain([0,600]).range([260, 120]),
+	  	  c,
 	  	  linha = d3.svg.line().x(function(d,i){return x(d[0]);}).y(function(d,i){return y(d[1])});
 
 
@@ -666,11 +663,102 @@
 	  	  d3.selectAll(".ano").remove();
 	  	  d3.select("div#selecionaClasse").style("display", "block");
 	  	  d3.selectAll(".linha").remove();
-	  	  y.domain(d3.extent(totMes, function(d){return d[1];}));
-		  d3.select("svg").append("path").datum(totMes).attr({"class":"linha grf", "d":linha}).style("fill", "none");
+	  	  dominioSparkline[1] = d3.max(sparkline.dados, function(d){return d[1];});
+	  	  dominioSparkline[0] = 0;
+	  	  if (referencia) {
+	  	  	referencia.sort(function(a, b) {
+	  	  		return b.indice - a.indice;
+	  	  	});
+	  	  	//console.log(referencia);
+	  	  	for (i=0;i<referencia.length;i++)
+	  	  		if(referencia[i].indice > dominioSparkline[1])
+					dominioSparkline[1] = referencia[i].indice;
+	  	  }
+	  	  y.domain(dominioSparkline);
+	  	  c = d3.scale.linear().domain([0,dominioSparkline[1]]).range([80,255]);
+		  d3.select("svg").append("path").datum(sparkline.dados).attr({"class":"linha grf", "d":linha}).style({"fill":"none", "stroke":"#666666"});
 	  	  for (i=0;i<4;i++)
-	  	  	d3.select("svg").append("circle").attr({"cx":x(totMes[i*12][0]), "cy":y(totMes[i*12][1]), "r":2, "class":"linha"}).style({"fill": "steelblue", "stroke":"none"});
-	  	  
+	  	  	d3.select("svg")
+	  	  		.datum(sparkline.dados[i*12][1])
+	  	  		.append("circle")
+	  	  		.attr({"cx":x(sparkline.dados[i*12][0]), "cy":y(sparkline.dados[i*12][1]), "r":2, "class":"linha"})
+	  	  		.style({"fill": "steelblue", "stroke":"none"})
+	  	  		.on("mouseover", function(d) {
+    				cl.tooltip.html(sparkline.msg[lang]+": "+d.toFixed(2));
+				    return cl.tooltip.style("visibility", "visible");
+			      })
+		    	.on("mousemove", function(d){
+			      if (d != ano)
+			      	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
+			        	.style("left",(d3.event.pageX+25)+"px");
+			        return;
+			    })
+		    	.on("mouseout", function(d){
+			    	if (d != ano)
+			        	return cl.tooltip.style("visibility", "hidden");
+			        return;
+			      });
+	  	  if (referencia) {
+		  	  for (i = 0; i < referencia.length; i++) {
+		  	  	  //referencia[i].cor = cl.colorbrewer.RdBu[referencia.length][i];
+		  	  	  referencia[i].cor = "#" + Math.trunc(c(referencia[i].indice)).toString(16) + "2050";
+		  	  	  //console.log(referencia[i].cor);
+			  	  d3.select("svg")
+			  	  	//.selectAll("linhas")
+			  	  	.datum(referencia[i])
+			  	  	.append("line")
+			  	  	.attr({"x1": x(0),
+			  	  		   "x2": x(47),
+			  	  		   "y1": function(d) {
+			  	  		   	return(y(d.indice));
+			  	  		   },
+			  	  		   "y2":function(d) {
+			  	  		   	return(y(d.indice));
+			  	  		   },
+			  	  		   "class":"linha grf"})
+			  	  	.style({"fill":"none",
+			  	  			"stroke-width":1,
+			  	  			"opacity": 0.5,
+			  	  			"stroke": "#AAAAAA"});
+			  	  d3.select("svg")
+			  	  	.datum(referencia[i])
+			  	  	.append("text")
+			  	  	.attr({"x":x(47.2),
+			  	  		   "y": function (d){return y(d.indice)+3;},
+			  	  		   "class": "linha grf"})
+			  	  	.style({"font-size": "9px",
+			  	  		"stroke": "none",
+			  	  		"fill": function(d) {
+			  	  			return d.cor;
+			  	  		}
+			  	  	})
+			  	  	.text(referencia[i].pais[lang])
+			  	  	.on("mouseover", function(d) {
+			  	  		d3.selectAll("line.linha").filter(function(linha) {
+			  	  				return linha.pais == d.pais;
+			  	  			})
+			  	  			.style({"stroke":function(linha){return linha.cor;},
+			  	  				    "opacity":1});
+	    				cl.tooltip.html(["Taxa de estupros por 100.000 habitantes, "+d.pais[lang]+": "+d.indice.toLocaleString(),
+	    								 "Rape rate by 100,000 inhabitants, "+d.pais[lang]+": "+d.indice.toLocaleString(),][lang]);
+					    return cl.tooltip.style("visibility", "visible");
+				      })
+			    	.on("mousemove", function(d){
+				      if (d != ano)
+				      	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
+				        	.style("left",(d3.event.pageX+25)+"px");
+				        return;
+				    })
+			    	.on("mouseout", function(d){
+			    		d3.selectAll("line.linha").filter(function(linha) {
+			  	  				return linha.pais == d.pais;
+			  	  			})
+			  	  			.style({"stroke":"#AAAAAA",
+			  	  				    "opacity":0.5});
+				        	return cl.tooltip.style("visibility", "hidden");
+				      });
+		  	  }
+	  	  }
 	  	  i = 0;
 	  	  for(j in dados) {
 	  	  	d3.select("svg")
@@ -747,8 +835,8 @@
 	        break;
 		  }
 		  //cl.cor = d3.scale.threshold().domain(domEixo).range(rangEixo);
-	    myRange = cl.colorbrewer.OrRd[faixas+1];
-	    cl.cor = d3.scale.threshold().domain(domEixo).range(myRange);
+	      myRange = cl.colorbrewer.OrRd[faixas+1];
+	      cl.cor = d3.scale.threshold().domain(domEixo).range(myRange);
 		  var yAxis = d3.svg.axis().scale(y).tickValues(cl.cor.domain()).orient("left");
 		  var g = d3.select(".mvG").append("g")
 		    .attr("class", "legenda")
@@ -851,11 +939,19 @@
       		return pintaMapa;
     	};
 
-    	pintaMapa.totMes = function(valor) {
-    		if (!arguments.length) return totMes;
-    		totMes = valor;
+    	pintaMapa.sparkline = function(valor) {
+    		if (!arguments.length) return sparkline;
+    		sparkline = valor;
     		return pintaMapa;
     	}
+
+    	pintaMapa.referencia = function(valor) {
+    		if (!arguments.length) return referencia;
+    		referencia = valor;
+    		//console.table(referencia);
+    		return pintaMapa;
+    	}
+
 
     	return pintaMapa;
 	};

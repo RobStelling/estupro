@@ -34,13 +34,26 @@ dsv("./csv/mensagemISP.csv", function (dados) {
 // AISP;DP;JAN;FEV;MAR;ABR;MAI;JUN;JUL;AGO;SET;OUT;NOV;DEZ;TOTAL
 // 5;001;1;-;-;1;-;-;1;-;-;-;1;-;4
 q()
+  .defer(dsv, "./csv/PopulacaoEstadoRJ-1990-2016.csv", function(dados){
+      return {
+        ano: +dados.Ano,
+        populacao: +dados.Populacao
+      };
+    })
+  .defer(dsv, "./csv/indicePaises.csv", function(dados) {
+      return {
+        pais: [dados.Pais, dados.Country],
+        ano: +dados.Ano,
+        indice: +dados.Indice
+      };
+    })
   .defer(dsv, "./csv/Estupro2016.csv", function(dados){
       return {
         aisp: +dados.AISP,
         dp: +dados.DP,
         meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
         +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-        total: +dados.TOTAL,
+        total: +dados.TOTAL
       }; })
   .defer(dsv, "./csv/Estupro2015.csv", function(dados){
       return {
@@ -48,7 +61,7 @@ q()
         dp: +dados.DP,
         meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
         +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-        total: +dados.TOTAL,
+        total: +dados.TOTAL
       }; })
   .defer(dsv, "./csv/Estupro2014.csv", function(dados){
         return {
@@ -56,7 +69,7 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
   .defer(dsv, "./csv/Estupro2013.csv", function(dados){
         return {
@@ -64,7 +77,7 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
   .defer(dsv, "./csv/ROcorrencias-2016.csv", function(dados){
         return {
@@ -72,7 +85,7 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
   .defer(dsv, "./csv/ROcorrencias-2015.csv", function(dados){
         return {
@@ -80,7 +93,7 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
   .defer(dsv, "./csv/ROcorrencias-2014.csv", function(dados){
         return {
@@ -88,7 +101,7 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
   .defer(dsv, "./csv/ROcorrencias-2013.csv", function(dados){
         return {
@@ -96,9 +109,10 @@ q()
           dp: +dados.DP,
           meses: [+dados.JAN, +dados.FEV, +dados.MAR, +dados.ABR, +dados.MAI, +dados.JUN,
           +dados.JUL, +dados.AGO, +dados.SET, +dados.OUT, +dados.NOV, +dados.DEZ],
-          total: +dados.TOTAL,
+          total: +dados.TOTAL
         }; })
-  .await(function(error, es2016, es2015, es2014, es2013,
+  .await(function(error, populacaoRJ, indicePaises,
+                         es2016, es2015, es2014, es2013,
                          rr2016, rr2015, rr2014, rr2013) {
 
     function projecao(vetor, base) {
@@ -115,6 +129,17 @@ q()
 
     if (error)
       console.log(error);
+
+
+    var indices = [];
+    //console.table(indicePaises);
+    for (i = 0; i<indicePaises.length;i++)
+      indices.push([[indicePaises[i].pais, indicePaises[i].country], indicePaises[i].indice]);
+
+    var popRJ = {};
+    for (i = 0; i<populacaoRJ.length; i++) {
+      popRJ[populacaoRJ[i].ano] = populacaoRJ[i].populacao;
+    }
 
     var ees = [], err = [];
 
@@ -163,7 +188,8 @@ q()
     for (j in totaisMe) {
       for (m=0; m<12; m++) {
         i = totaisMeMes.length;
-        totaisMeMes.push([i, totaisMe[j][m]]);
+        divisor = popRJ[2013 + Math.trunc(i/12)]/100000/12;
+        totaisMeMes.push([i, totaisMe[j][m]/divisor]);
       }
     }
 
@@ -177,10 +203,10 @@ q()
         total[j]+=totais[j][i];
       }
     }
-    vetDados.push({selecionado: true, dados:estC, distribuicao: "linear", tipo:"cisp", total: totaisMeMes,
+    vetDados.push({selecionado: true, dados:estC, distribuicao: "linear", tipo:"cisp", total: {dados:totaisMeMes, msg:["Estupros por 100.000 habitantes", "Rapes per 100.000 inhabitants"]}, indices: indicePaises,
                    range: [0, maxC], legenda1: ["Estupros por CISP", "Rape cases by CISP"][lang],
                    legenda2: ["Estupros p/CISP", "Rape cases/CISP"][lang], classes: 6, ano: 2013});
-    vetDados.push({selecionado: true, dados:est, distribuicao: "linear", tipo:"aisp", total: totaisMeMes,
+    vetDados.push({selecionado: true, dados:est, distribuicao: "linear", tipo:"aisp", total: {dados:totaisMeMes, msg:["Estupros por 100.000 habitantes", "Rapes per 100.000 inhabitants"]}, indices: indicePaises,
                    range: [0, max], legenda1: ["Estupros por AISP", "Rape cases by AISP"][lang],
                    legenda2: ["Estupros p/AISP", "Rape cases/AISP"][lang], classes: 6, ano: 2013});
     vetDados.push({selecionado: false, legenda1: "──────────────────────────────" });
@@ -229,10 +255,10 @@ q()
       }
     }
 
-    vetDados.push({selecionado: true, dados:roC, distribuicao: "linear", tipo:"cisp", total: totaisMrMes,
+    vetDados.push({selecionado: true, dados:roC, distribuicao: "linear", tipo:"cisp", total: {dados:totaisMrMes, msg:["Total de Ocorrências", "Total criminal records"]},
                    range: [0, maxC], legenda1: ["Registro de Ocorrências por CISP", "Total cases by CISP"][lang],
                    legenda2: ["Registro de Ocorrências p/CISP", "Total cases/CISP"][lang], classes: 6, ano:2013});
-    vetDados.push({selecionado: true, dados:ro, distribuicao: "linear", tipo:"aisp", total: totaisMrMes,
+    vetDados.push({selecionado: true, dados:ro, distribuicao: "linear", tipo:"aisp", total: {dados:totaisMrMes, msg:["Total de Ocorrências", "Total criminal records"]},
                    range: [0, max], legenda1: ["Registro de Ocorrências por AISP", "Total cases by AISP"][lang],
                    legenda2: ["Registro de Ocorrências p/AISP", "Total cases/AISP"][lang], classes: 6, ano: 2013});
     preencheIndicador(vetDados);
@@ -275,7 +301,8 @@ function preencheIndicador(listaIndicadores) {
         .rangeData(vetDados[selInd].range)
         .tit(vetDados[selInd].legenda1)
         .faixas(+d3.select("#valor-classes").text())
-        .totMes(vetDados[selInd].total)
+        .sparkline(vetDados[selInd].total)
+        .referencia(vetDados[selInd].indices)
         .call();
       hist
         .dados(vetDados[selInd].dados)
@@ -331,7 +358,8 @@ function preencheIndicador(listaIndicadores) {
         .tit(vetDados[selInd].legenda1)
         .faixas(initClasse(vetDados[selInd].classes))
         .ano(vetDados[selInd].ano)
-        .totMes(vetDados[selInd].total)
+        .sparkline(vetDados[selInd].total)
+        .referencia(vetDados[selInd].indices)
         .call();
       hist.dados(vetDados[selInd].dados).legenda(vetDados[selInd].legenda1).escalaY(vetDados[selInd].distribuicao).tipo(vetDados[selInd].tipo).ano(vetDados[selInd].ano).rangeHist(vetDados[selInd].range).call();
       rangeUpdate();
