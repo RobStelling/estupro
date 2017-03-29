@@ -6,11 +6,11 @@ var lang;
 lang = window.navigator.userLanguage || window.navigator.language == "pt-BR" ? 0 : 1;
 
 if (lang) {
-  d3.select("#tituloPagina").html("Rape cases in Rio de Janeiro since 2013 to April 2016");
-  d3.select("#comentario").html("2016 numbers based on January to April 2016 average");
+  d3.select("#tituloPagina").html("Rape cases in Rio de Janeiro since 2013 to May 2016");
+  d3.select("#comentario").html("2016 numbers based on January to May 2016 average");
   d3.select("#vejaTambem").html('See also: <a href="/impeachment" id="linkAlternativo">Brazil Impeachment Voting 2016</a>');
   d3.select("#tabMapa").html("Map");
-  d3.select("#tabHistograma").html("Histogram");
+  d3.select("#tabHistograma").html("Chart");
   d3.select("#selecaoIndicador").html("Select indicator...");
   d3.select("#ordena").html(" Sort");
   d3.select("#tituloClasses").html("Classes: ");
@@ -118,6 +118,7 @@ q()
     function projecao(vetor, base) {
       var mediaMensal;
       for (i = 0; i<vetor.length; i++) {
+        mediaMensal = 0;
         if (!isNaN(vetor[i].total)) {
           mediaMensal = vetor[i].total/base;
           vetor[i].total = mediaMensal*12;
@@ -143,8 +144,9 @@ q()
 
     var ees = [], err = [];
 
-    projecao(es2016, 4);
-    projecao(rr2016, 4);
+    projecao(es2016, 5);
+    projecao(rr2016, 5);
+    //console.log(es2016);
 
     ees.push(es2016);
     ees.push(es2015);

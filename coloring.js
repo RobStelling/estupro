@@ -254,6 +254,8 @@
     }
   };
 
+  var mes = [["Jan", "Jan"], ["Fev", "Feb"], ["Mar", "Mar"], ["Abr", "Apr"], ["Mai", "May"], ["Jun", "Jun"],
+  			 ["Jul", "Jul"], ["Ago", "Aug"], ["Set", "Sep"], ["Out", "Oct"], ["Nov", "Nov"], ["Dez", "Dec"]];
 	
 	cl.nomeRegiao = ["Região Metropolitana", "Região Noroeste Fluminense", "Região Norte Fluminense", "Região Serrana", "Região das Baixadas Litorâneas", "Região do Médio Paraiba", "Região Centro-sul", "Região da Costa Verde"];
 	cl.classeRegiao = ["metropolitana", "noroestefluminense", "nortefluminense", "serrana", "baixadaslitoraneas", "medioparaiba", "centro-sul", "costaverde"];
@@ -437,7 +439,7 @@
 	    d3.format = brasil.numberFormat;
 	
 	  projecao =
-	    d3.geo.conicEqualArea().center([-0.375,-21.7]).rotate([42.50, 0])
+	    d3.geo.conicEqualArea().center([-0.38,-21.71]).rotate([42.50, 0])
 	    .parallels([-21.05,-23.05]).scale(12000);
 	
 	  //projecao = d3.geo.mercator().scale(10500).translate([8250, -3900]);
@@ -627,7 +629,7 @@
 	var hashRegioes = {};
 	
 	cl.pintaMapa = function() {
-	  var INICIOX = 10, TAMANHOX = 125,
+	  var INICIOX = 4, TAMANHOX = 120,
 	  	  dados = [],
 	  	  distribuicao = "linear",
 	  	  tipo = "",
@@ -654,7 +656,7 @@
 	  function pintaMapa() {
 	  	  var domEixo = [], dominioSparkline = [];
 	  	  var x = d3.scale.linear().domain([0,48]).range([INICIOX, 4*TAMANHOX+INICIOX]),
-	  	  y = d3.scale.linear().domain([0,600]).range([260, 120]),
+	  	  y = d3.scale.linear().domain([0,600]).range([265, 110]),
 	  	  c,
 	  	  linha = d3.svg.line().x(function(d,i){return x(d[0]);}).y(function(d,i){return y(d[1])});
 
@@ -663,9 +665,11 @@
 	  	  d3.selectAll(".ano").remove();
 	  	  d3.select("div#selecionaClasse").style("display", "block");
 	  	  d3.selectAll(".linha").remove();
+	  	  d3.selectAll(".rectInvisivel").remove();
 	  	  dominioSparkline[1] = d3.max(sparkline.dados, function(d){return d[1];});
-	  	  dominioSparkline[0] = 0;
+	  	  dominioSparkline[0] = d3.min(sparkline.dados, function(d){return d[1];});
 	  	  if (referencia) {
+	  	  	dominioSparkline[0] = 0;
 	  	  	referencia.sort(function(a, b) {
 	  	  		return b.indice - a.indice;
 	  	  	});
@@ -676,7 +680,23 @@
 	  	  }
 	  	  y.domain(dominioSparkline);
 	  	  c = d3.scale.linear().domain([0,dominioSparkline[1]]).range([80,255]);
-		  d3.select("svg").append("path").datum(sparkline.dados).attr({"class":"linha grf", "d":linha}).style({"fill":"none", "stroke":"#666666"});
+		  d3.select(".mapSVG").append("path").datum(sparkline.dados).attr({"class":"linha grf", "d":linha}).style({"fill":"none", "stroke":"#666666"});
+		  //console.log(sparkline.dados);
+		  d3.select(".mapSVG").append("g").attr("class", "linha")
+		  	.selectAll("circle")
+		  	.data(sparkline.dados)
+		  	.enter()
+		  	.append("circle")
+		  	.attr({"cx":function(d){return x(d[0])}, "cy":function(d){return y(d[1]);}, "r":function(d){return d[0]%12 == 0 ? 2:0;}, "class":"linha"})
+		  	.style({"fill": "steelblue"});
+		  
+		  	/*
+		  d3.select("svg").append("g").attr("class", "retangulo")
+		  	.selectAll("rect")
+		  	.data(sparkline.dados)
+		  	.enter()
+		  	.append("rect")
+		  /*
 	  	  for (i=0;i<4;i++)
 	  	  	d3.select("svg")
 	  	  		.datum(sparkline.dados[i*12][1])
@@ -698,67 +718,60 @@
 			        	return cl.tooltip.style("visibility", "hidden");
 			        return;
 			      });
+		    	*/
 	  	  if (referencia) {
-		  	  for (i = 0; i < referencia.length; i++) {
-		  	  	  //referencia[i].cor = cl.colorbrewer.RdBu[referencia.length][i];
-		  	  	  referencia[i].cor = "#" + Math.trunc(c(referencia[i].indice)).toString(16) + "2050";
-		  	  	  //console.log(referencia[i].cor);
-			  	  d3.select("svg")
-			  	  	//.selectAll("linhas")
-			  	  	.datum(referencia[i])
-			  	  	.append("line")
-			  	  	.attr({"x1": x(0),
-			  	  		   "x2": x(47),
-			  	  		   "y1": function(d) {
-			  	  		   	return(y(d.indice));
-			  	  		   },
-			  	  		   "y2":function(d) {
-			  	  		   	return(y(d.indice));
-			  	  		   },
-			  	  		   "class":"linha grf"})
-			  	  	.style({"fill":"none",
-			  	  			"stroke-width":1,
-			  	  			"opacity": 0.5,
-			  	  			"stroke": "#AAAAAA"});
-			  	  d3.select("svg")
-			  	  	.datum(referencia[i])
-			  	  	.append("text")
-			  	  	.attr({"x":x(47.2),
-			  	  		   "y": function (d){return y(d.indice)+3;},
-			  	  		   "class": "linha grf"})
-			  	  	.style({"font-size": "9px",
-			  	  		"stroke": "none",
-			  	  		"fill": function(d) {
-			  	  			return d.cor;
-			  	  		}
-			  	  	})
-			  	  	.text(referencia[i].pais[lang])
-			  	  	.on("mouseover", function(d) {
-			  	  		d3.selectAll("line.linha").filter(function(linha) {
-			  	  				return linha.pais == d.pais;
-			  	  			})
-			  	  			.style({"stroke":function(linha){return linha.cor;},
-			  	  				    "opacity":1});
-	    				cl.tooltip.html(["Taxa de estupros por 100.000 habitantes, "+d.pais[lang]+": "+d.indice.toLocaleString(),
-	    								 "Rape rate by 100,000 inhabitants, "+d.pais[lang]+": "+d.indice.toLocaleString(),][lang]);
-					    return cl.tooltip.style("visibility", "visible");
-				      })
-			    	.on("mousemove", function(d){
-				      if (d != ano)
-				      	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
-				        	.style("left",(d3.event.pageX+25)+"px");
-				        return;
-				    })
-			    	.on("mouseout", function(d){
-			    		d3.selectAll("line.linha").filter(function(linha) {
-			  	  				return linha.pais == d.pais;
-			  	  			})
-			  	  			.style({"stroke":"#AAAAAA",
-			  	  				    "opacity":0.5});
-				        	return cl.tooltip.style("visibility", "hidden");
-				      });
-		  	  }
+	  	  	for (i=0;i<referencia.length;i++)
+	  	  		referencia[i].cor =  "#" +
+	  	  							Math.trunc(c(referencia[i].indice)).toString(16) + 						// R c(indice) em base 16
+	  	  							"50" +																	// G 80 (50 em base 16)
+	  	  							("0" + Math.trunc(255-c(referencia[i].indice)).toString(16)).slice(-2);	// B 255-c(indice) em base 16
+	  	  	d3.select(".mapSVG").append("g").attr("class", "linha grf line")
+	  	  		.selectAll("line")
+	  	  		.data(referencia)
+	  	  		.enter()
+	  	  		.append("line")
+	  	  		.attr({ "x1":x(0),
+	  	  				"x2":x(47),
+	  	  				"y1":function(d){return y(d.indice);},
+	  	  				"y2":function(d){return y(d.indice);}})
+	  	  		.style({"fill":"none",
+	  	  				"stroke-width":1,
+	  	  				"opacity":0.3,
+	  	  				"stroke":"#AAAAAA"});
+	  	  	d3.select(".mapSVG").append("g").attr("class", "linha grf text")
+	  	  		.selectAll("text")
+	  	  		.data(referencia)
+	  	  		.enter()
+	  	  		.append("text")
+	  	  		.attr({ "x":x(47.5),
+	  	  				"y":function(d){return y(d.indice)+3;},
+	  	  				"class": "linha grf"})
+	  	  		.style({"font-size":"9px",
+	  	  				"stroke":"none",
+	  	  				"fill": function(d){return d.cor;}})
+	  	  		.text(function(d){return d.pais[lang]})
+		  	  	.on("mouseover", function(d) {
+		  	  		d3.selectAll("g.line")
+		  	  			.selectAll("line")
+		  	  			.filter(function(linha){
+		  	  				return linha.pais == d.pais;})
+		  	  			.style({"stroke":function(linha){return linha.cor;},
+		  	  				    "opacity":1});
+    				cl.tooltip.html(["Taxa de estupros por 100.000 habitantes, "+d.pais[lang]+": "+d.indice.toLocaleString(),
+    								 "Rape rate by 100,000 inhabitants, "+d.pais[lang]+": "+d.indice.toLocaleString(),][lang]);
+				    return cl.tooltip.style("visibility", "visible");})
+		    	.on("mousemove", function(d){
+			      	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
+			        	.style("left",(d3.event.pageX+25)+"px");})
+		    	.on("mouseout", function(d){
+		    		d3.selectAll("g.line").selectAll("line").filter(function(linha) {
+		  	  				return linha.pais == d.pais;})
+		  	  			.style({"stroke":"#AAAAAA",
+		  	  				    "opacity":0.3});
+			        	return cl.tooltip.style("visibility", "hidden");});
 	  	  }
+
+
 	  	  i = 0;
 	  	  for(j in dados) {
 	  	  	d3.select("svg")
@@ -799,6 +812,57 @@
 	  	  	i++;
 	  	  }
 
+
+	  	  dominioY = y.domain();
+	  	  //console.log(ano, x.range(), x.domain(), y.range(), y.domain(), y(dominioY[1])-y(dominioY[0]));
+	  	  /**/
+	  	  if (d3.selectAll("rect.anos")[0].length == 0)
+	  	  	d3.select("svg").append("rect")
+		  	  	.attr({"class": "anos",
+		  	  		   "x": x((ano-2013)*12),
+		  	  		   "y": y(dominioY[1]),
+		  	  		   "height":y(dominioY[0])-y(dominioY[1]),
+		  	  		   "width":x(11)-x(0)})
+		  	  	.style({"fill":"steelblue",
+		  	  			"opacity":0.3});
+	  	  else
+	  	  	d3.select("rect.anos").transition().duration(1000)
+	  	  		.attr("x", x((ano-2013)*12));
+
+	  	  d3.select("svg").append("g").attr("class", "rectInvisivel")
+		  	.selectAll("rect")
+		  	.data(sparkline.dados)
+		  	.enter()
+		  	.append("rect")
+		  	.attr({"class": "rectInvisivel",
+		  	  	   "x": function(d){return x(d[0])-(x(1)-x(0))/2;},
+		  	  	   "y": function(d){return y(dominioSparkline[1]);},
+		  	  	   "height":y(dominioSparkline[0])-y(dominioSparkline[1]),
+		  		   "width":x(1)-x(0)})
+		  	.style({"fill":"white",
+		  	  		"opacity":1e-6,
+		  	  		"stroke":"none"})
+  	  		.on("mouseover", function(d) {
+  	  			digitos = Math.floor(d[1]) == d[1] ? 0 : 2;
+				cl.tooltip.html(sparkline.msg[lang]+" "+mes[d[0]%12][lang]+"/"+(2013+Math.floor(d[0]/12))+": "+d[1].toFixed(digitos));
+				datum = d3.select(this).data()[0];
+				d3.selectAll("circle.linha").filter(function(dd){return datum == dd;})
+					.transition().duration(200)
+					.attr({"r":4}).style({"fill":"steelblue"});
+			    return cl.tooltip.style("visibility", "visible");
+		      })
+	    	.on("mousemove", function(d){
+		     	return cl.tooltip.style("top", (d3.event.pageY-20)+"px")
+		        	.style("left",(d3.event.pageX+25)+"px");
+		    })
+	    	.on("mouseout", function(d){
+	    		datum = d3.select(this).data()[0];
+	    		d3.selectAll("circle.linha").filter(function(dd){return datum == dd;})
+	    			.transition().duration(200)
+	    			.attr({"r":function(dd){return dd[0]%12 == 0 ? 2 : 0}});
+		        return cl.tooltip.style("visibility", "hidden");
+		      });
+		  /**/
 	      cl.status = tipo;
 
 		  d3.select(".c"+ano).style("fill", "steelblue");
@@ -951,7 +1015,6 @@
     		//console.table(referencia);
     		return pintaMapa;
     	}
-
 
     	return pintaMapa;
 	};

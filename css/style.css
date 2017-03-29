@@ -1,5 +1,5 @@
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 path {
@@ -28,26 +28,34 @@ path {
 */
 .titulo {
   font-size: 20px;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /*font-family: Helvetica, sans-serif; */
   fill: black;
   stroke: none;
   font-weight: bold;
 }
 .titulo1 {
   font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  /*
   font-family: Tahoma, sans-serif;
+  */
   fill: black;
   stroke: none;
   /*  font-weight: bold; */
 }
 .tituloISP {
   font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  /*
   font-family: Arial, sans-serif;
+  */
   fill: black;
   stroke: none;
   /*  font-weight: bold; */
 }
 .myTip {
+  font-family: 'Roboto', sans-serif;
   display: table-cell;
   vertical-align: middle;
   position: absolute;
@@ -111,7 +119,10 @@ circle {
   transition: fill, 0.5s;  
 }
 .isp {
+  /*
   font-family: Helvetica;
+  */
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   fill: gray;
 }
@@ -124,6 +135,7 @@ circle {
   opacity:0;
 }
 .legenda {
+  font-family: 'Roboto', sans-serif;
   font-size: 11px;
   fill: black;
   stroke: none;
@@ -131,7 +143,10 @@ circle {
 }
 
 .ano {
+  font-family: 'Roboto', sans-serif;
+  /*
   font-family: Helvetica;
+   */
   font-weight: 800;
   font-size: 3em;
   fill: gray;
