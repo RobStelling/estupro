@@ -119,28 +119,34 @@
                                         } :
                                         function(a, b) {
                                           return d3.ascending(hs.nomeAISPouDP[tipo](a[0]), hs.nomeAISPouDP[tipo](b[0]));
+                                          /*
                                           if (tipo == "aisp")
                                             return d3.ascending(hs.stringLimpa(cl.aisp("nome", a[0])), hs.stringLimpa(cl.aisp("nome", b[0])));
                                           else
                                             return d3.ascending(hs.stringLimpa(cl.dp(a[0])), hs.stringLimpa(cl.dp(b[0])));
+                                          */
                                         })
                                      .map(
                                       function(d) {
                                         return hs.nomeAISPouDP[tipo](d[0]);
+                                        /*
                                         if (tipo == "aisp")
                                           return cl.aisp("nome", d[0]);
                                         else
                                           return cl.dp(d[0]);
+                                         */
                                       })).copy();
 
       svgH.selectAll(".bar")
         .sort(
           function(a, b) {
             return x0(hs.nomeAISPouDP[tipo](a[0])) - x0(hs.nomeAISPouDP[tipo](b[0]));
+            /*
             if (tipo == "aisp")
               return x0(cl.aisp("nome", a[0])) - x0(cl.aisp("nome", b[0]));
             else
               return x0(cl.dp(a[0])) - x0(cl.dp(b[0]));
+            */
           });
 
       var transition = svgH.transition().duration(950),
@@ -151,10 +157,12 @@
           .attr("x",
             function(d) {
               return x0(hs.nomeAISPouDP[tipo](d[0]))
+              /*
               if (tipo == "aisp")
                 return x0(cl.aisp("nome", d[0]));
               else
                 return x0(cl.dp(d[0]));
+                 */
             });
 
       transition.select(".x.axis")

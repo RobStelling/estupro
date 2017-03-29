@@ -6,8 +6,8 @@ var lang;
 lang = window.navigator.userLanguage || window.navigator.language == "pt-BR" ? 0 : 1;
 
 if (lang) {
-  d3.select("#tituloPagina").html("Rape cases in Rio de Janeiro since 2013 to May 2016");
-  d3.select("#comentario").html("2016 numbers based on January to May 2016 average");
+  d3.select("#tituloPagina").html("Rape cases in Rio de Janeiro from 2013 to 2016");
+  //d3.select("#comentario").html("2016 numbers based on January to November 2016 average");
   d3.select("#vejaTambem").html('See also: <a href="/impeachment" id="linkAlternativo">Brazil Impeachment Voting 2016</a>');
   d3.select("#tabMapa").html("Map");
   d3.select("#tabHistograma").html("Chart");
@@ -114,7 +114,7 @@ q()
   .await(function(error, populacaoRJ, indicePaises,
                          es2016, es2015, es2014, es2013,
                          rr2016, rr2015, rr2014, rr2013) {
-
+/*
     function projecao(vetor, base) {
       var mediaMensal;
       for (i = 0; i<vetor.length; i++) {
@@ -127,6 +127,7 @@ q()
           vetor[i].meses[j] = mediaMensal;
       }
     }
+ */
 
     if (error)
       console.log(error);
@@ -143,9 +144,10 @@ q()
     }
 
     var ees = [], err = [];
-
-    projecao(es2016, 5);
-    projecao(rr2016, 5);
+/*
+    projecao(es2016, 11);
+    projecao(rr2016, 11);
+ */
     //console.log(es2016);
 
     ees.push(es2016);
